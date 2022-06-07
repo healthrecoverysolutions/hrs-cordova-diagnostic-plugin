@@ -110,6 +110,9 @@ public class Diagnostic extends CordovaPlugin{
         Diagnostic.addBiDirMapEntry(_permissionsMap, "BODY_SENSORS", Manifest.permission.BODY_SENSORS);
         // Add as string as Manifest.permission.ACTIVITY_RECOGNITION not defined in < API 29:
         Diagnostic.addBiDirMapEntry(_permissionsMap, "ACTIVITY_RECOGNITION", "android.permission.ACTIVITY_RECOGNITION");
+        // Add as string as Manifest.permission.{BLUETOOTH_CONNECT, BLUETOOTH_SCAN}    not defined in < API 31:
+        Diagnostic.addBiDirMapEntry(_permissionsMap, "BLUETOOTH_SCAN", "android.permission.BLUETOOTH_SCAN");
+        Diagnostic.addBiDirMapEntry(_permissionsMap, "BLUETOOTH_CONNECT", "android.permission.BLUETOOTH_CONNECT");
         permissionsMap = Collections.unmodifiableMap(_permissionsMap);
     }
 
@@ -506,6 +509,10 @@ public class Diagnostic extends CordovaPlugin{
                 // This version of Android doesn't support activity recognition permission so check for body sensors permission
                 permission = "BODY_SENSORS";
             }
+            if(Build.VERSION.SDK_INT < 31 && (permission.equals("BLUETOOTH_SCAN") || permission.equals("BLUETOOTH_CONNECT"))   ){
+                // This version of Android doesn't support Nearby devices permission so check for location for bluetooth
+                permission = "ACCESS_FINE_LOCATION";
+            }
             String androidPermission = permissionsMap.get(permission);
             Log.v(TAG, "Get authorisation status for "+androidPermission);
             boolean granted = hasPermission(androidPermission);
@@ -824,6 +831,10 @@ public class Diagnostic extends CordovaPlugin{
                 if(Build.VERSION.SDK_INT < 29 && permission.equals("ACTIVITY_RECOGNITION")){
                     // This version of Android doesn't support activity recognition permission so check for body sensors permission
                     permission = "BODY_SENSORS";
+                }
+                if(Build.VERSION.SDK_INT < 31 && (permission.equals("BLUETOOTH_SCAN") || permission.equals("BLUETOOTH_CONNECT"))   ){
+                    // This version of Android doesn't support Nearby devices permission so check for location for bluetooth
+                    permission = "ACCESS_FINE_LOCATION";
                 }
                 String status;
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
