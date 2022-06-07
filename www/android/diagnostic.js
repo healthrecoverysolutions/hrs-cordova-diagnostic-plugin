@@ -54,7 +54,9 @@ var Diagnostic = (function(){
             "WRITE_EXTERNAL_STORAGE": "WRITE_EXTERNAL_STORAGE",
             "READ_EXTERNAL_STORAGE": "READ_EXTERNAL_STORAGE",
             "BODY_SENSORS": "BODY_SENSORS",
-            "ACTIVITY_RECOGNITION": "ACTIVITY_RECOGNITION"
+            "ACTIVITY_RECOGNITION": "ACTIVITY_RECOGNITION",
+            "BLUETOOTH_SCAN": "BLUETOOTH_SCAN",
+            "BLUETOOTH_CONNECT": "BLUETOOTH_CONNECT"
         };
 
     /**
@@ -73,7 +75,8 @@ var Diagnostic = (function(){
             "SENSORS": ["BODY_SENSORS"],
             "SMS": ["SEND_SMS", "RECEIVE_SMS", "READ_SMS", "RECEIVE_WAP_PUSH", "RECEIVE_MMS"],
             "STORAGE": ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
-            "PHYSICAL_ACTIVITY": ["ACTIVITY_RECOGNITION"]
+            "PHYSICAL_ACTIVITY": ["ACTIVITY_RECOGNITION"],
+            "NEARBY_DEVICES": ["BLUETOOTH_SCAN", "BLUETOOTH_CONNECT"]
         };
 
     Diagnostic.runtimePermissionStatus = // deprecated

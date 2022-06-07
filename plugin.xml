@@ -303,8 +303,12 @@
             </feature>
         </config-file>
 
-        <config-file parent="/*" target="AndroidManifest.xml">
-            <uses-permission android:name="android.permission.BLUETOOTH" />
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.BLUETOOTH"
+                android:maxSdkVersion="30" />
+            <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+                android:usesPermissionFlags="neverForLocation"/>
+            <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
         </config-file>
 
         <js-module name="Diagnostic_Bluetooth" src="www/android/diagnostic.bluetooth.js">
